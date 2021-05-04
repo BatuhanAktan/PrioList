@@ -1,6 +1,7 @@
 {
   "manifest_version": 2,
   "name": "PrioList",
+  "content_security_policy": "script-src 'self' https://github.com/puppeteer/puppeteer; object-src 'self'",
   "description": "This extension allows you to create a wishlist which is then prioritized by the order of importance",
   "version": "0.0",
 

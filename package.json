@@ -1,0 +1,19 @@
+{
+  "name": "browserify",
+  "version": "1.0.0",
+  "description": "bundling",
+  "main": "scrapper.js",
+  "scripts": {
+    "build": "browserify scrapper.js -o bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BatuhanAktan/QhacksPrioList.git"
+  },
+  "author": "Batuhan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BatuhanAktan/QhacksPrioList/issues"
+  },
+  "homepage": "https://github.com/BatuhanAktan/QhacksPrioList#readme"
+}
