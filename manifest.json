@@ -1,11 +1,10 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "PrioList",
-  "content_security_policy": "script-src 'self' https://github.com/puppeteer/puppeteer; object-src 'self'",
   "description": "This extension allows you to create a wishlist which is then prioritized by the order of importance",
   "version": "0.0",
 
-  "browser_action": {
+  "action": {
    "default_icon": "./visuals/icon.png",
    "default_popup": "popup.html"
   },
@@ -13,7 +12,6 @@
    "activeTab",
    "storage",
    "tabs",
-   "identity",
-   "http://localhost:9222/*"
+   "identity"
    ]
 }

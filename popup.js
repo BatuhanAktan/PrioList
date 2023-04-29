@@ -4,7 +4,7 @@ const orgBtn = document.querySelector('.navbttnro');
 
 let importance = {"Health & Personal Care":1,"Amazon Device Accessories":3, "Amazon Kindle":3, "Automotive & Powersports":3,"Baby Products (excluding apparel)":1, "Beauty":3, "Books":3, "Camera & Photo":3,"Cell Phones & Accessories":3,"Collectible Coins":4,"Consumer Electronics":3,"Entertainment Collectibles":3,"Fine Art":4,"Grocery & Gourmet Food":1,"Health & Personal Care":1,"Home & Garden,Independent Design":3,"Industrial & Scientific":3,"Kindle Accessories and Amazon Fire TV Accessories":4,"Major Appliances":2,"Music":3,"Musical Instruments":3,"Office Products":2,"Outdoors":3,"Personal Computers":2,"Pet Supplies":2,"Software":2,"Sports":2,"Sports Collectibles":4,"Tools & Home Improvement":2,"Toys & Games":2,"Video":3, "DVD & Blu-ray":3,"Video Games":3,"Watches":4};
 
-let list = [];
+let uid;
 
 var info = [
 {
@@ -12,10 +12,8 @@ var info = [
 	data: 0,
 	url: "None"
 }];
-var id = 0;
-chrome.storage.sync.get(['data'], function(result) {
-		loadList(result.data);
-		console.log("Result Has been changed "+ result.data);
+chrome.storage.sync.get(['id'], function(result) {
+		currentId(result.id);
 	});
 
 
@@ -40,20 +38,26 @@ addBtn.onclick = async ()=>{
 
 					let status = await JSON.parse(returnContent.status);
 					console.log(status);
-					if (status === 1){
+					try{
+						if (parseInt(status) === 1){
 
-						let title = await JSON.stringify(returnContent.title.title);
-						title = title.slice(1,30) + "...";
-						let price = await JSON.stringify(returnContent.price.price);
-						price = price.slice(1,-1);
-						let img  = await JSON.stringify(returnContent.img.img);
+							let title = await JSON.stringify(returnContent.title.title);
+							title = title.slice(1,30) + "...";
+							let price = await JSON.stringify(returnContent.price.price);
+							price = price.slice(1,-1);
+							let img  = await JSON.stringify(returnContent.img.img);
+							let category = await JSON.stringify(returnContent.category.category);
+							category = price.slice(1,-1);
 
-						console.log("In response");
-						console.log(img);
-						addList(id+1, title, price, img, "Health");
-						id++;
-					}else{
-						console.log("Cannot Add");
+							console.log("In response");
+							console.log(img);
+							addList(id, title, price, img, category);
+
+						}else{
+							console.log("Cannot Add");
+						}
+					}catch(error){
+						console.log(error);
 					}
 			}
 
@@ -62,6 +66,12 @@ addBtn.onclick = async ()=>{
 
 		search(url);
 	});
+}
+
+const currentId = async (id) => {
+	if (id.length == 0){
+		uid = await 
+	}
 }
 
 
@@ -90,10 +100,10 @@ clearBtn.onclick = ()=>{
 	list=[];
 
 	let wshlist = document.getElementById("wishlist");
-	wshlist.innerHTML = ' ';
+	wshlist.innerHTML = '';
 }
 
-
+/*
 function organize(orglist){
 	let newlist = [];
 	orglist.forEach(function(item){
@@ -116,6 +126,7 @@ function organize(orglist){
 	console.log(newlist.length);
 }
 
+*/
 
 function addList(ID, itemName, itemPrice, itemPicUrl, itemCat){
 
